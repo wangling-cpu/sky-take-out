@@ -118,4 +118,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(total,list);
     }
 
+
+    @Override
+/**
+ * 启动或停止某个功能的方法
+ * @param status 状态参数，用于标识是启动还是停止
+ * @param id 需要操作的功能或对象的唯一标识符
+ */
+    public void startOrStop(Integer status, long id) {
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+        employeeMapper.update(employee);
+    }
+
 }
