@@ -76,7 +76,7 @@ public class EmployeeController {
     @ApiOperation("新增员工")
     public Result save(@RequestBody EmployeeDTO employeeDTO) {
         log.info("新增员工：{}", employeeDTO);
-        System.out.println("当前线程的id:"+Thread.currentThread().getId());
+        System.out.println("当前线程的id:" + Thread.currentThread().getId());
         employeeService.save(employeeDTO);
         return Result.success();
     }
@@ -86,17 +86,40 @@ public class EmployeeController {
     @ApiOperation("分页查询员工")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
         log.info("分页查询员工：{}", employeePageQueryDTO);
-        PageResult pageResult=employeeService.pageQuery(employeePageQueryDTO);
+        PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
 
     }
 
     @PostMapping("/status/{status}")
     @ApiOperation("启用禁用员工账号")
-    public Result startOrStop(@PathVariable Integer status,long id) {
-        log.info("启用禁用员工账号：{},{}", status,id);
-        employeeService.startOrStop(status,id);
+    public Result startOrStop(@PathVariable Integer status, long id) {
+        log.info("启用禁用员工账号：{},{}", status, id);
+        employeeService.startOrStop(status, id);
         return Result.success();
+    }
 
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工")
+    public Result<Employee> getById(@PathVariable Long id) {
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+
+    }
+
+/**
+ * 更新员工信息的接口方法
+ * 使用HTTP PUT方法进行请求
+ *
+ * @param employeeDTO 包含员工更新信息的DTO对象，通过请求体传递
+ * @return 返回操作结果对象，包含操作状态和信息
+ */
+    @PutMapping
+    @ApiOperation("更新员工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("更新员工信息：{}", employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    // 方法体为空，需要实现具体的更新逻辑
     }
 }

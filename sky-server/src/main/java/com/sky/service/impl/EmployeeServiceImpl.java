@@ -133,4 +133,34 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.update(employee);
     }
 
+/**
+ * 根据员工ID获取员工信息的方法
+ * 这是一个重写的方法，可能是从某个接口或父类继承而来
+ *
+ * @param id 员工的唯一标识符，类型为Long
+ * @return 返回对应的Employee对象，当前实现直接返回null
+ */
+    @Override
+    public Employee getById(Long id) {
+        Employee employee=employeeMapper.getById(id);
+        employee.setPassword("****");
+        return employee;
+
+    }
+
+    /**
+ * 更新员工信息的方法
+ * @param employeeDTO 包含员工更新信息的DTO对象
+ */
+    @Override  //
+    public void update(EmployeeDTO employeeDTO) {  // 定义一个更新员工信息的方法，接收一个EmployeeDTO类型的参数
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO,employee);
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+
+        employeeMapper.update(employee);
+
+    }
+
 }

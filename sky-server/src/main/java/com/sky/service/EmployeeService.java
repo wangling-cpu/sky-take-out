@@ -39,4 +39,18 @@ public interface EmployeeService {
  * @param id 要操作的唯一标识符
  */
     void startOrStop(Integer status, long id);
+
+/**
+ * 根据员工ID获取员工信息
+ * @param id 员工ID，Long类型
+ * @return 返回对应ID的Employee对象
+ */
+    Employee getById(Long id);
+
+/**
+ * 更新员工信息的方法
+ * 该方法接收一个EmployeeDTO对象作为参数，用于更新员工信息
+ * @param employeeDTO 包含员工更新信息的DTO对象
+ */
+    void update(EmployeeDTO employeeDTO);
 }

@@ -41,4 +41,8 @@ public interface EmployeeMapper {
  * @param employee 需要更新的员工对象，包含新的员工信息
  */
     void update(Employee employee);
+
+
+    @Select("select * from employee where id = #{id}")
+    Employee getById(Long id);
 }
